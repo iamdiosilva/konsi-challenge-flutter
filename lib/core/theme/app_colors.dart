@@ -5,7 +5,7 @@ class AppColors {
 
   // ignore: unnecessary_const
   static const MaterialColor mainColorTheme =
-      const MaterialColor(0xFFcccccc, <int, Color>{
+      MaterialColor(0xFFcccccc, <int, Color>{
     50: Color(0xFFcccccc),
     100: Color(0xFFcccccc),
     200: Color(0xFFcccccc),

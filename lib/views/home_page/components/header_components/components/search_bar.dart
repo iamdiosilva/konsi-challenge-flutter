@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../../../../core/dictionary/lang_pt_br.dart';
+import 'search_button.dart';
+
 class SearchBar extends StatelessWidget {
   const SearchBar({super.key});
 
@@ -19,10 +22,19 @@ class SearchBar extends StatelessWidget {
               decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white10,
-                label: Text('Pesquisar CEP'),
+                label: Text(LangPTBR.searchBarLabel),
                 labelStyle: TextStyle(color: Colors.white54),
-                prefixIcon: Icon(Icons.location_on, color: Colors.white54),
-                suffixIcon: Icon(Icons.search),
+                prefixIcon: Icon(
+                  Icons.location_on,
+                  color: Colors.white54,
+                ),
+                suffixIcon: Padding(
+                  padding: EdgeInsets.only(right: 6),
+                  child: SizedBox(
+                    width: 50,
+                    child: SearchButton(),
+                  ),
+                ),
                 border: InputBorder.none,
               ),
             ),

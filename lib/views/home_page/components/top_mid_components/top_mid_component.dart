@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/app_colors.dart';
+import 'components/more_researched.dart';
+
 class TopMidComponent extends StatelessWidget {
   const TopMidComponent({super.key});
 
@@ -9,16 +12,7 @@ class TopMidComponent extends StatelessWidget {
       height: 200,
       child: Row(
         children: [
-          Flexible(
-            flex: 40,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 1, bottom: 1, top: 1),
-              child: Container(
-                color: Colors.yellow,
-                child: const Center(child: Text('Left')),
-              ),
-            ),
-          ),
+          const MoreResearched(),
           Flexible(
             flex: 60,
             child: Column(
@@ -28,7 +22,7 @@ class TopMidComponent extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 1, bottom: 1, top: 1),
                     child: Container(
-                      color: Colors.yellow,
+                      color: AppColors.primaryColor,
                       child: const Center(child: Text('Right Top')),
                     ),
                   ),

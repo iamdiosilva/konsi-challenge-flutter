@@ -15,7 +15,7 @@ class BottomInfoComponent extends StatelessWidget {
               padding: const EdgeInsets.only(top: 1, right: 1),
               child: Container(
                 color: Colors.lightBlueAccent,
-                child: Center(child: Text('Left')),
+                child: const Center(child: Text('Left')),
               ),
             ),
           ),
@@ -25,7 +25,7 @@ class BottomInfoComponent extends StatelessWidget {
               padding: const EdgeInsets.only(top: 1, left: 1),
               child: Container(
                 color: Colors.lightBlueAccent,
-                child: Center(child: Text('Right')),
+                child: const Center(child: Text('Right')),
               ),
             ),
           ),
