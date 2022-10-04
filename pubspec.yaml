@@ -38,6 +38,11 @@ dependencies:
   #external packages
   google_fonts: ^3.0.1
   flutter_svg: ^1.1.5
+  flutter_config: ^2.0.0
+  google_maps_flutter: ^2.2.1
+  http: ^0.13.5
+  provider: ^6.0.3
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:
