@@ -27,7 +27,7 @@ class HttpService implements IHttpService<ResponseModel> {
         url,
         options: Options(
           headers: {
-            "Authorization": "Token token=b4cfd3156dbc85e472ca3ef8a72673e1",
+            "Authorization": "Token",
           },
         ),
       );
