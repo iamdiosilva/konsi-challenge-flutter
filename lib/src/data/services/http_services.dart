@@ -31,7 +31,11 @@ class HttpService implements IHttpService<ResponseModel> {
           },
         ),
       );
-      return ResponseModel(response.data);
+      if (response.statusCode == 200) {
+        return ResponseModel(response.data);
+      } else {
+        throw HttpException("Erro ao buscar o cep");
+      }
     } catch (e) {
       throw HttpException(e.toString());
     }

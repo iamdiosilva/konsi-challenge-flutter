@@ -6,8 +6,11 @@ import 'search_button.dart';
 class SearchBar extends StatelessWidget {
   final Function() onPressed;
   final TextEditingController controller;
-  const SearchBar(
-      {super.key, required this.onPressed, required this.controller});
+  const SearchBar({
+    super.key,
+    required this.onPressed,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {

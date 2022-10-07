@@ -4,20 +4,32 @@ import 'package:konsi_challange/src/domain/entities/local_entity.dart';
 
 class LocalProvider with ChangeNotifier {
   final ILocalRepository repository;
+  // ignore: avoid_init_to_null
   LocalEntity? localEntity = null;
+  LocalEntity? lastLocalEntity = null;
   bool isLoading = false;
 
   LocalProvider(this.repository);
 
   Future<void> getLocal(String cep) async {
-    isLoading = true;
-    notifyListeners();
-    try {
-      localEntity = await repository.getLocal(cep);
-    } catch (e) {
-      localEntity = null;
+    if (!isLoading) {
+      isLoading = true;
+      notifyListeners();
+      try {
+        getLastLocal();
+        localEntity = await repository.getLocal(cep);
+        if (lastLocalEntity == null) {
+          getLastLocal();
+        }
+      } catch (e) {
+        localEntity = null;
+      }
+      isLoading = false;
+      notifyListeners();
     }
-    isLoading = false;
-    notifyListeners();
+  }
+
+  getLastLocal() {
+    lastLocalEntity = localEntity;
   }
 }

@@ -17,10 +17,6 @@ class _HomePageState extends State<HomePage> {
   late GoogleMapController mapController;
   late TextEditingController _searchController;
 
-  onMapCreated(GoogleMapController gmc) async {
-    mapController = gmc;
-  }
-
   @override
   void initState() {
     _searchController = TextEditingController();
@@ -50,10 +46,9 @@ class _HomePageState extends State<HomePage> {
                     mapController = controller;
                   },
                   markers: (localProvider.localEntity != null)
-                      ? [
+                      ? {
                           Marker(
-                            markerId:
-                                MarkerId('${localProvider.localEntity!.cep}'),
+                            markerId: MarkerId(localProvider.localEntity!.cep),
                             position: LatLng(
                               localProvider.localEntity!.latitude,
                               localProvider.localEntity!.longitude,
@@ -62,28 +57,59 @@ class _HomePageState extends State<HomePage> {
                               title: localProvider.localEntity!.adress,
                             ),
                           ),
-                        ].toSet()
-                      : <Marker>[].toSet(),
+                        }
+                      : <Marker>{}.toSet(),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 32),
-                child: SearchBar(
-                  controller: _searchController,
-                  onPressed: () async {
-                    await localProvider.getLocal(_searchController.text);
-                    mapController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        CameraPosition(
-                          target: LatLng(
-                            localProvider.localEntity!.latitude,
-                            localProvider.localEntity!.longitude,
-                          ),
-                          zoom: 18,
+                child: AnimatedCrossFade(
+                  crossFadeState: localProvider.isLoading
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  duration: const Duration(milliseconds: 500),
+                  firstChild: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)),
+                      color: Colors.white,
+                    ),
+                    width: 320,
+                    child: Column(
+                      children: const [
+                        LinearProgressIndicator(
+                          color: Colors.blue,
                         ),
-                      ),
-                    );
-                  },
+                        SizedBox(height: 8),
+                        Text(
+                          'Pesquisando...',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  secondChild: SearchBar(
+                    controller: _searchController,
+                    onPressed: () async {
+                      await localProvider.getLocal(_searchController.text);
+                      mapController.animateCamera(
+                        CameraUpdate.newCameraPosition(
+                          CameraPosition(
+                            target: LatLng(
+                              localProvider.localEntity!.latitude,
+                              localProvider.localEntity!.longitude,
+                            ),
+                            zoom: 18,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
               Positioned(
